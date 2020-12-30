@@ -1,3 +1,4 @@
+pipeline {
 agent {
     kubernetes {
         label podlabel
@@ -19,3 +20,4 @@ spec:
             }
         }
     }
+}
