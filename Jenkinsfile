@@ -15,7 +15,7 @@ pipeline {
         """}
     }
             steps {
-                sh 'kubectl deploy -f k8s-manifest/cart-redis.yaml'
+                sh 'kubectl apply -f k8s-manifest/cart-redis.yaml'
             }
         }
        stage ('Deploy Cart MS') {
@@ -32,7 +32,7 @@ pipeline {
         """}
     }
             steps {
-                sh 'kubectl deploy -f k8s-manifest/cart-ms.yaml'
+                sh 'kubectl apply -f k8s-manifest/cart-ms.yaml'
             }
         }
     }
