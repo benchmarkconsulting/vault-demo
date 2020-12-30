@@ -1,4 +1,7 @@
-podTemplate(yaml: """
+agent {
+    kubernetes {
+        label podlabel
+        yaml """
 kind: Pod
 spec:
   containers:
@@ -7,10 +10,15 @@ spec:
     imagePullPolicy: Always
     tty: false
 """
-) {
-    node(POD_LABEL){
-        container('jnlp') {
     }
-
+    stages {
+        stage ('test') {
+            agent {
+                label 'jnlp'
+            }
+            steps {
+                echo 
+            }
+        }
     }
 }
