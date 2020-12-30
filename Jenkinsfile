@@ -14,10 +14,10 @@ spec:
     }
     stages {
         stage ('test') {
-            }
             steps {
-                echo 
+                echo "hello world"
             }
         }
     }
+}
 }
