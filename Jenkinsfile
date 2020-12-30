@@ -33,7 +33,6 @@ pipeline {
     }
             steps {
                 sh 'kubectl apply -f ./k8s-manifests/cart-ms.yaml -n default'
-                sh 'wget http://cart.default.svc.cluster.local'
             }
         }
     }

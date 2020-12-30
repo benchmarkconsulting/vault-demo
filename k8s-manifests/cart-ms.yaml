@@ -68,7 +68,16 @@ spec:
           value: '1'
         ports:
         - containerPort: 5000
-          name: cart
+        readinessProbe:
+          tcpSocket:
+            port: 5000
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:
+          tcpSocket:
+            port: 5000
+          initialDelaySeconds: 15
+          periodSeconds: 20
         volumeMounts:
         - mountPath: "/data"
           name: "acmefit-cart-data"
