@@ -13,8 +13,6 @@ spec:
     }
     stages {
         stage ('test') {
-            agent {
-                label 'jnlp'
             }
             steps {
                 echo 
