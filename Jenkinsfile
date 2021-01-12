@@ -5,16 +5,19 @@ def secrets = [
         [path: 'secret/data/qa/wordpress', engineVersion: 2, secretValues: [
             [envVar: 'qafirstdbpass', vaultKey: 'firstdbpass'],
             [envVar: 'qawordppassword', vaultKey: 'password']]],
+	[path: 'secret/data/dev/wordpress', engineVersion: 2, secretValues: [
+            [envVar: 'devmariadbpassword', vaultKey: 'password']]],
+	[path: 'secret/data/qa/wordpress', engineVersion: 2, secretValues: [
+            [envVar: 'qamariadbpassword', vaultKey: 'password']]],
         [path: 'secret/integration/jira', engineVersion: 2, secretValues: [
             [envVar: 'jirauser', vaultKey: 'user'],
             [envVar: 'jirapass', vaultKey: 'password']]],
         [path: 'secret/integration/sonar', engineVersion: 2, secretValues: [
             [envVar: 'AUTH', vaultKey: 'token']]]
     ]
-    def configuration = [vaultUrl: 'http://vault.mc1985.net:8200',
-                         vaultCredentialId: 'vault-approle',
-                         engineVersion: 1]
- 
+
+def configuration = [vaultUrl: 'http://vault.mc1985.net:8200', vaultCredentialId: 'vault-approle', engineVersion: 1]
+                                             
 pipeline {
     agent none
     stages {
@@ -147,7 +150,7 @@ pipeline {
             steps {
                 withVault([configuration: configuration, vaultSecrets: secrets]) {
                     sh "helm repo add bitnami https://charts.bitnami.com/bitnami"
-                    sh "helm upgrade --install dev-wordpress bitnami/wordpress --set mariadb.auth.rootPassword=$devfirstdbpass --set wordpressPassword=$devwordppassword -n default"
+                    sh "helm upgrade --install dev-wordpress bitnami/wordpress --set mariadb.auth.rootPassword=$devfirstdbpass --set wordpressPassword=$devwordppassword --set mariadb.auth.password=$DEVMARIADB_PASSWORD -n default"
                 }
             }
         }
@@ -167,7 +170,7 @@ pipeline {
             steps {
                 withVault([configuration: configuration, vaultSecrets: secrets]) {
                     sh "helm repo add bitnami https://charts.bitnami.com/bitnami"
-                    sh "helm upgrade --install qa-wordpress bitnami/wordpress --set mariadb.auth.rootPassword=$qafirstdbpass --set wordpressPassword=$qawordppassword -n default"
+                    sh "helm upgrade --install qa-wordpress bitnami/wordpress --set mariadb.auth.rootPassword=$qafirstdbpass --set wordpressPassword=$qawordppassword --set mariadb.auth.password=$QAMARIADB_PASSWORD -n default"
                 }
             }
         }
