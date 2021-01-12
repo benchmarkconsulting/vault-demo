@@ -150,7 +150,7 @@ pipeline {
             steps {
                 withVault([configuration: configuration, vaultSecrets: secrets]) {
                     sh "helm repo add bitnami https://charts.bitnami.com/bitnami"
-                    sh "helm upgrade --install dev-wordpress bitnami/wordpress --set mariadb.auth.rootPassword=$devfirstdbpass --set wordpressPassword=$devwordppassword --set mariadb.auth.password=$DEVMARIADB_PASSWORD -n default"
+                    sh "helm upgrade --install dev-wordpress bitnami/wordpress --set mariadb.auth.rootPassword=$devfirstdbpass --set wordpressPassword=$devwordppassword --set mariadb.auth.password=$devmariadbpassword -n default"
                 }
             }
         }
@@ -170,7 +170,7 @@ pipeline {
             steps {
                 withVault([configuration: configuration, vaultSecrets: secrets]) {
                     sh "helm repo add bitnami https://charts.bitnami.com/bitnami"
-                    sh "helm upgrade --install qa-wordpress bitnami/wordpress --set mariadb.auth.rootPassword=$qafirstdbpass --set wordpressPassword=$qawordppassword --set mariadb.auth.password=$QAMARIADB_PASSWORD -n default"
+                    sh "helm upgrade --install qa-wordpress bitnami/wordpress --set mariadb.auth.rootPassword=$qafirstdbpass --set wordpressPassword=$qawordppassword --set mariadb.auth.password=$qamariadbpassword -n default"
                 }
             }
         }
