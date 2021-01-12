@@ -1,14 +1,12 @@
 def secrets = [
         [path: 'secret/data/dev/wordpress', engineVersion: 2, secretValues: [
             [envVar: 'devfirstdbpass', vaultKey: 'firstdbpass'],
+	    [envVar: 'devmariadbpassword', vaultKey: 'dbpassword'],
             [envVar: 'devwordppassword', vaultKey: 'password']]],
         [path: 'secret/data/qa/wordpress', engineVersion: 2, secretValues: [
             [envVar: 'qafirstdbpass', vaultKey: 'firstdbpass'],
+	    [envVar: 'qamariadbpassword', vaultKey: 'dbpassword'],
             [envVar: 'qawordppassword', vaultKey: 'password']]],
-	[path: 'secret/data/dev/wordpress', engineVersion: 2, secretValues: [
-            [envVar: 'devmariadbpassword', vaultKey: 'dbpassword']]],
-	[path: 'secret/data/qa/wordpress', engineVersion: 2, secretValues: [
-            [envVar: 'qamariadbpassword', vaultKey: 'dbpassword']]],
         [path: 'secret/integration/jira', engineVersion: 2, secretValues: [
             [envVar: 'jirauser', vaultKey: 'user'],
             [envVar: 'jirapass', vaultKey: 'password']]],
